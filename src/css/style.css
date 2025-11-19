@@ -1,0 +1,71 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.container {
+  max-width: 500px;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.collapse-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 10px;
+}
+
+.collapse-button:hover {
+  background-color: #0069d9;
+}
+
+.collapsible-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+.collapsible-content.expanded {
+  max-height: 200px;
+  border-color: #dee2e6;
+}
+
+.content-text {
+  padding: 15px;
+  margin: 0;
+  color: #212529;
+  line-height: 1.5;
+  font-size: 14px;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+}
+
+.copy-text {
+  color: #6c757d;
+  font-size: 12px;
+  cursor: pointer;
+  display: block;
+  margin-top: 5px;
+  text-align: right;
+  text-decoration: none;
+}
+
+.copy-text:hover {
+  color: #0056b3;
+}
