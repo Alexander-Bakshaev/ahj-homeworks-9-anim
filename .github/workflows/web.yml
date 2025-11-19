@@ -27,7 +27,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: ./dist   # <-- укажи папку сборки из webpack.prod.js
 
   deploy:
     needs: build
@@ -38,7 +38,6 @@ jobs:
 
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Deploy to GitHub Pages
