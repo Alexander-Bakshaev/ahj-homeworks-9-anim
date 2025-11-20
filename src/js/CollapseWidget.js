@@ -4,24 +4,25 @@ export default class CollapseWidget {
     this.content = document.getElementById(contentId);
     this.copyButton = document.querySelector(copyTextClass);
     this.isOpen = false;
-    
+
     if (!this.button || !this.content || !this.copyButton) {
       console.error('Required elements not found');
       return;
     }
-    
+
+    this.boundToggle = this.toggle.bind(this);
+    this.boundCopyContent = this.copyContent.bind(this);
+
     this.init();
   }
 
   init() {
-    // Set initial state
     this.content.style.transition = 'max-height 0.3s ease-out, border-color 0.3s ease';
     this.content.style.overflow = 'hidden';
     this.content.style.maxHeight = '0';
-    
-    // Add event listeners
-    this.button.addEventListener('click', () => this.toggle());
-    this.copyButton.addEventListener('click', (e) => this.copyContent(e));
+
+    this.button.addEventListener('click', this.boundToggle);
+    this.copyButton.addEventListener('click', this.boundCopyContent);
   }
 
   toggle() {
@@ -45,9 +46,13 @@ export default class CollapseWidget {
   }
 
   copyContent(e) {
-    e.stopPropagation(); // Prevent toggle when clicking copy button
-    const textToCopy = this.content.querySelector('.content-text').textContent.trim();
-    
+    e.stopPropagation();
+
+    const textToCopy =
+      this.content.querySelector('.content-text')?.textContent.trim();
+
+    if (!textToCopy) return;
+
     navigator.clipboard.writeText(textToCopy)
       .then(() => {
         const originalText = this.copyButton.textContent;
@@ -57,5 +62,24 @@ export default class CollapseWidget {
         }, 2000);
       })
       .catch(err => console.error('Failed to copy text: ', err));
+  }
+
+  destroy() {
+    if (this.button && this.boundToggle) {
+      this.button.removeEventListener('click', this.boundToggle);
+    }
+
+    if (this.copyButton && this.boundCopyContent) {
+      this.copyButton.removeEventListener('click', this.boundCopyContent);
+    }
+
+    this.button = null;
+    this.content = null;
+    this.copyButton = null;
+
+    this.boundToggle = null;
+    this.boundCopyContent = null;
+
+    this.isOpen = null;
   }
 }
